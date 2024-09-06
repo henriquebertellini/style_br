@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz: Descubra qual roupa combina com você</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        .quiz-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        .quiz-container h1 {
+            font-size: 26px;
+            margin-bottom: 30px;
+            color: #00796b;
+        }
+
+        .question {
+            margin-bottom: 25px;
+            font-size: 16px;
+            text-align: left;
+        }
+
+        .question label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #004d40;
+        }
+
+        .result {
+            display: none;
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            color: #00796b;
+        }
+
+        .result img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .quiz-container {
+                width: 90%;
+            }
+
+            .quiz-container h1 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <h1>Qual roupa combina com você?</h1>
+    
+        <div id="quiz">
+            <div class="question">
+                <label>1. Qual seu estilo de roupa?</label>
+                <label><input type="radio" name="q1" value="colorido"> Colorido</label>
+                <label><input type="radio" name="q1" value="neutro"> Neutro</label>
+                <label><input type="radio" name="q1" value="alternativo"> Alternativo</label>
+            </div>
+    
+            <div class="question">
+                <label>2. Qual sua estação favorita?</label>
+                <label><input type="radio" name="q2" value="verao"> Verão</label>
+                <label><input type="radio" name="q2" value="inverno"> Inverno</label>
+                <label><input type="radio" name="q2" value="primavera"> Primavera</label>
+            </div>
+    
+            <div class="question">
+                <label>3. Qual sua peça favorita?</label>
+                <label><input type="radio" name="q3" value="camisa"> Camisa</label>
+                <label><input type="radio" name="q3" value="calca"> Calça</label>
+                <label><input type="radio" name="q3" value="vestido"> Vestido</label>
+            </div>
+    
+            <button onclick="calculateResult()">Descobrir</button>
+    
+            <div id="result" class="result"></div>
+        </div>
+    </div>
+
+<script>
+    function calculateResult() {
+        const answers = {
+            q1: document.querySelector('input[name="q1"]:checked')?.value,
+            q2: document.querySelector('input[name="q2"]:checked')?.value,
+            q3: document.querySelector('input[name="q3"]:checked')?.value
+        };
+
+        if (!answers.q1 || !answers.q2 || !answers.q3) {
+            document.getElementById('result').innerHTML = 'Por favor, responda todas as perguntas!';
+            document.getElementById('result').style.display = 'block';
+            return;
+        }
+
+        let resultText = '';
+        let imageUrl = '';
+
+        // Combinando as respostas para determinar o resultado
+        if (answers.q1 === 'colorido' && answers.q2 === 'verao' && answers.q3 === 'camisa') {
+            resultText = 'Look vibrante de verão com camisa colorida!';
+            imageUrl = 'images/colorido-verao-camisa.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'verao' && answers.q3 === 'calca') {
+            resultText = 'Estilo colorido e fresco com calça para os dias quentes de verão!';
+            imageUrl = 'images/colorido-verao-calca.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'verao' && answers.q3 === 'vestido') {
+            resultText = 'Vestido alegre e colorido perfeito para o verão ensolarado!';
+            imageUrl = 'images/colorido-verao-vestido.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'inverno' && answers.q3 === 'camisa') {
+            resultText = 'Camisa colorida para aquecer os dias frios de inverno com estilo!';
+            imageUrl = 'images/colorido-inverno-camisa.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'inverno' && answers.q3 === 'calca') {
+            resultText = 'Look ousado de inverno com calça e cores vivas!';
+            imageUrl = 'images/colorido-inverno-calca.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'inverno' && answers.q3 === 'vestido') {
+            resultText = 'Vestido colorido de inverno para quem quer um toque de cor na estação fria!';
+            imageUrl = 'images/colorido-inverno-vestido.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'primavera' && answers.q3 === 'camisa') {
+            resultText = 'Camisa colorida leve e alegre para combinar com o clima da primavera!';
+            imageUrl = 'images/colorido-primavera-camisa.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'primavera' && answers.q3 === 'calca') {
+            resultText = 'Look vibrante e confortável com calça colorida para os dias de primavera!';
+            imageUrl = 'images/colorido-primavera-calca.jpg';
+        } else if (answers.q1 === 'colorido' && answers.q2 === 'primavera' && answers.q3 === 'vestido') {
+            resultText = 'Estilo primaveril com vestido colorido!';
+            imageUrl = 'images/colorido-primavera-vestido.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'verao' && answers.q3 === 'camisa') {
+            resultText = 'Look minimalista de verão com camisa neutra!';
+            imageUrl = 'images/neutro-verao-camisa.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'verao' && answers.q3 === 'calca') {
+            resultText = 'Calça neutra e elegante para um verão confortável!';
+            imageUrl = 'images/neutro-verao-calca.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'verao' && answers.q3 === 'vestido') {
+            resultText = 'Vestido neutro leve para um verão casual e sofisticado!';
+            imageUrl = 'images/neutro-verao-vestido.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'inverno' && answers.q3 === 'camisa') {
+            resultText = 'Camisa neutra de inverno para um look discreto e confortável!';
+            imageUrl = 'images/neutro-inverno-camisa.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'inverno' && answers.q3 === 'calca') {
+            resultText = 'Estilo sofisticado de inverno com calça neutra!';
+            imageUrl = 'images/neutro-inverno-calca.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'inverno' && answers.q3 === 'vestido') {
+            resultText = 'Vestido neutro de inverno para um visual chique e discreto!';
+            imageUrl = 'images/neutro-inverno-vestido.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'primavera' && answers.q3 === 'camisa') {
+            resultText = 'Camisa neutra leve para um look minimalista de primavera!';
+            imageUrl = 'images/neutro-primavera-camisa.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'primavera' && answers.q3 === 'calca') {
+            resultText = 'Look casual e neutro com calça para os dias de primavera!';
+            imageUrl = 'images/neutro-primavera-calca.jpg';
+        } else if (answers.q1 === 'neutro' && answers.q2 === 'primavera' && answers.q3 === 'vestido') {
+            resultText = 'Vestido neutro para uma primavera elegante!';
+            imageUrl = 'images/neutro-primavera-vestido.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'verao' && answers.q3 === 'camisa') {
+            resultText = 'Look alternativo de verão com camisa descolada!';
+            imageUrl = 'images/alternativo-verao-camisa.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'verao' && answers.q3 === 'calca') {
+            resultText = 'Estilo alternativo e moderno para um verão único!';
+            imageUrl = 'images/alternativo-verao-calca.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'verao' && answers.q3 === 'vestido') {
+            resultText = 'Vestido alternativo estiloso para um verão original!';
+            imageUrl = 'images/alternativo-verao-vestido.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'inverno' && answers.q3 === 'camisa') {
+            resultText = 'Camisa alternativa de inverno para um visual autêntico e ousado!';
+            imageUrl = 'images/alternativo-inverno-camisa.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'inverno' && answers.q3 === 'calca') {
+            resultText = 'Estilo alternativo para o inverno com calça ousada!';
+            imageUrl = 'images/alternativo-inverno-calca.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'inverno' && answers.q3 === 'vestido') {
+            resultText = 'Vestido alternativo de inverno para um look fora do comum!';
+            imageUrl = 'images/alternativo-inverno-vestido.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'primavera' && answers.q3 === 'camisa') {
+            resultText = 'Camisa alternativa leve para um estilo único de primavera!';
+            imageUrl = 'images/alternativo-primavera-camisa.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'primavera' && answers.q3 === 'calca') {
+            resultText = 'Calça alternativa e estilosa para os dias criativos de primavera!';
+            imageUrl = 'images/alternativo-primavera-calca.jpg';
+        } else if (answers.q1 === 'alternativo' && answers.q2 === 'primavera' && answers.q3 === 'vestido') {
+            resultText = 'Vestido alternativo e moderno para a primavera!';
+            imageUrl = 'images/alternativo-primavera-vestido.jpg';
+        }
+
+        document.getElementById('result').innerHTML = `<p>${resultText}</p><img src="${imageUrl}" alt="${resultText}">`;
+        document.getElementById('result').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
